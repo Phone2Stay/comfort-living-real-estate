@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comfort Living Real Estate - Dubai Luxury Properties</title>
+    <meta name="description" content="Dubai's premier luxury real estate team, specializing in exclusive development projects for discerning clients worldwide. Joe Hardy & Tyrone Herbert - Founders.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .navy { color: #1e3a8a; }
+        .bg-navy { background-color: #1e3a8a; }
+        .gold { color: #fbbf24; }
+        .bg-gold { background-color: #fbbf24; }
+        .text-gold { color: #fbbf24; }
+        .hover\:text-gold:hover { color: #fbbf24; }
+        .hover\:bg-gold:hover { background-color: #fbbf24; }
+        
+        .property-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+        }
+        
+        .modal-content {
+            margin: 15% auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #000;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-text {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 scroll-smooth">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-serif font-bold navy">
+                        Comfort Living <span class="text-gold">Real Estate</span>
+                    </h1>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link navy hover:text-gold transition-colors">Home</a>
+                    <div class="relative group">
+                        <button class="nav-link navy hover:text-gold transition-colors">
+                            Off Plan <i class="fas fa-chevron-down text-xs ml-1"></i>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                            <a href="#properties" class="block px-4 py-2 text-sm navy hover:bg-gray-100">All Projects</a>
+                        </div>
+                    </div>
+                    <a href="#about" class="nav-link navy hover:text-gold transition-colors">About Team</a>
+                    <a href="#contact" class="nav-link navy hover:text-gold transition-colors">Contact</a>
+                    <a href="#contact" class="bg-gold text-navy px-4 py-2 rounded-lg hover:bg-yellow-400 transition-colors">Secondary</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="navy">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 navy hover:text-gold">Home</a>
+                <a href="#properties" class="block px-3 py-2 navy hover:text-gold">Off Plan</a>
+                <a href="#about" class="block px-3 py-2 navy hover:text-gold">About Team</a>
+                <a href="#contact" class="block px-3 py-2 navy hover:text-gold">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen bg-gradient-to-br from-blue-900 to-blue-800 flex items-center justify-center text-white">
+        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div class="relative z-10 text-center max-w-4xl mx-auto px-4">
+            <h1 class="hero-text text-5xl md:text-6xl font-serif font-bold mb-6">
+                Dubai's Premier <span class="text-gold">Luxury Real Estate</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90">
+                Exclusive development projects for discerning clients worldwide
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#properties" class="bg-gold text-navy px-8 py-4 rounded-lg text-lg font-semibold hover:bg-yellow-400 transition-colors">
+                    Explore Projects
+                </a>
+                <a href="#contact" class="border-2 border-gold text-gold px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gold hover:text-navy transition-colors">
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Property Filters -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-serif font-bold navy mb-4">Our Portfolio</h2>
+                <p class="text-xl text-gray-600">Discover exceptional development projects across Dubai</p>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button onclick="filterProperties('hotel')" class="filter-btn bg-gold text-navy px-6 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition-colors">
+                    Branded Residences
+                </button>
+                <button onclick="filterProperties('residential')" class="filter-btn bg-white border-2 border-gold text-gold px-6 py-3 rounded-lg font-semibold hover:bg-gold hover:text-navy transition-colors">
+                    Residential
+                </button>
+                <button onclick="filterProperties('commercial')" class="filter-btn bg-white border-2 border-gold text-gold px-6 py-3 rounded-lg font-semibold hover:bg-gold hover:text-navy transition-colors">
+                    Commercial
+                </button>
+                <button onclick="filterProperties('all')" class="filter-btn bg-white border-2 border-gold text-gold px-6 py-3 rounded-lg font-semibold hover:bg-gold hover:text-navy transition-colors">
+                    All Off Plan
+                </button>
+            </div>
+
+            <!-- Properties Grid -->
+            <div id="properties" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Properties will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-serif font-bold navy mb-4">Meet Our Founders</h2>
+                <p class="text-xl text-gray-600">Decades of combined expertise in Dubai's luxury real estate market</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Mobile: Tyrone first, Desktop: Joe first -->
+                <div class="bg-gray-50 rounded-2xl p-8 text-center order-2 md:order-1">
+                    <div class="w-32 h-32 bg-navy rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <i class="fas fa-user text-4xl text-gold"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold navy mb-2">Joe Hardy</h3>
+                    <p class="text-gold font-semibold mb-4">Founder</p>
+                    <p class="text-gray-600 mb-4">+971 585 262 412</p>
+                    <p class="text-gray-600 leading-relaxed">
+                        A seasoned real estate professional with over 15 years of experience in Dubai's luxury market. Joe specializes in high-end residential developments and has facilitated over AED 500 million in property transactions. His deep understanding of Dubai's evolving landscape and strong relationships with premier developers make him an invaluable asset to discerning clients seeking exceptional investment opportunities.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-2xl p-8 text-center order-1 md:order-2">
+                    <div class="w-32 h-32 bg-navy rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <i class="fas fa-user text-4xl text-gold"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold navy mb-2">Tyrone Herbert</h3>
+                    <p class="text-gold font-semibold mb-4">Founder</p>
+                    <p class="text-gray-600 mb-4">+971 585 053 488</p>
+                    <p class="text-gray-600 leading-relaxed">
+                        An expert in luxury hospitality and branded residences with a proven track record in Dubai's premium property sector. Tyrone brings extensive knowledge of hotel-branded developments and has successfully guided international investors through complex property acquisitions. His expertise in market analysis and strategic investment planning has earned him recognition as a trusted advisor to high-net-worth individuals.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-serif font-bold navy mb-4">Contact Us</h2>
+                <p class="text-xl text-gray-600">Ready to explore Dubai's luxury real estate opportunities?</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="space-y-8">
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center mr-4 mt-1">
+                            <i class="fas fa-phone text-gold text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold navy mb-2">Phone</h3>
+                            <p class="text-gray-600">Joe: +971 585 262 412</p>
+                            <p class="text-gray-600">Tyrone: +971 585 053 488</p>
+                            <p class="text-sm text-gray-500">Available 24/7 for urgent inquiries</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center mr-4 mt-1">
+                            <i class="fas fa-envelope text-gold text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold navy mb-2">Email</h3>
+                            <p class="text-gray-600">info@comfortlivingrealestate.com</p>
+                            <p class="text-sm text-gray-500">We'll respond within 24 hours</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center mr-4 mt-1">
+                            <i class="fas fa-map-marker-alt text-gold text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold navy mb-2">Location</h3>
+                            <p class="text-gray-600">Dubai, UAE</p>
+                            <p class="text-sm text-gray-500">Serving clients worldwide</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-2xl shadow-lg">
+                    <form 
+                        action="https://formsubmit.co/info@comfortlivingrealestate.com"
+                        method="POST"
+                        class="space-y-6"
+                    >
+                        <input type="hidden" name="_subject" value="New Contact Form Submission - Comfort Living Real Estate">
+                        <input type="hidden" name="_next" value="https://comfortlivingrealestate.com/thank-you">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                                <input type="text" name="firstName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                                <input type="text" name="lastName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400">
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                <input type="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+                                <input type="tel" name="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                            <textarea name="message" rows="5" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 resize-none"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-gold text-navy py-3 px-6 rounded-lg font-semibold hover:bg-yellow-400 transition-colors">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy text-white py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-serif font-bold mb-4">
+                        Comfort Living <span class="text-gold">Real Estate</span>
+                    </h3>
+                    <p class="text-gray-300 mb-6">
+                        Dubai's premier luxury real estate team, specializing in exclusive properties for discerning clients worldwide.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-300 hover:text-gold transition-colors">Home</a></li>
+                        <li><a href="#properties" class="text-gray-300 hover:text-gold transition-colors">Projects</a></li>
+                        <li><a href="#about" class="text-gray-300 hover:text-gold transition-colors">About Team</a></li>
+                        <li><a href="#contact" class="text-gray-300 hover:text-gold transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-300">Luxury Sales</span></li>
+                        <li><span class="text-gray-300">Investment Advisory</span></li>
+                        <li><span class="text-gray-300">Property Management</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <div class="space-y-2 text-gray-300">
+                        <p><i class="fas fa-phone mr-2 text-gold"></i> Joe: +971 585 262 412</p>
+                        <p><i class="fas fa-phone mr-2 text-gold"></i> Tyrone: +971 585 053 488</p>
+                        <p><i class="fas fa-envelope mr-2 text-gold"></i> info@comfortlivingrealestate.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center">
+                <p class="text-gray-400">© 2025 Comfort Living Real Estate. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Property Details Modal -->
+    <div id="propertyModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalContent">
+                <!-- Property details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // All 16 Authentic Properties Data
+        const properties = [
+            {
+                id: 1,
+                title: "Franck Muller Aeternitas",
+                location: "Dubai Marina",
+                priceFrom: "Starting from AED 1.6M",
+                developer: "London Gate",
+                projectType: "residential",
+                unitTypes: "1BR, 2BR, 3BR, Villas, Mansions",
+                totalUnits: null,
+                floors: "106 floors",
+                paymentPlan: "20/80",
+                handover: "Q2 2027",
+                imageUrl: "static-assets/IMG_3934_1751913756243.jpeg",
+                galleryImages: ["static-assets/IMG_3934_1751913756243.jpeg"],
+                featured: true,
+                isNew: true,
+                description: "World's tallest branded residential clock tower at 450m height. A collaboration between renowned watchmaker Franck Muller and London Gate, featuring spectacular views and unrivaled craftsmanship.",
+                amenities: ["Padel Court", "Yoga Studio", "The London Gym", "Swimming Pool", "Kids' Play Area", "Cinema", "Party Hall", "Library", "Music Room", "Cigar Lounge", "The London Spa", "Sauna Rooms", "Jacuzzi", "Zen Garden"],
+                keyFeatures: ["450m height", "106 floors", "Franck Muller clock at zenith", "Prime Dubai Marina location", "Luxury branded residences"]
+            },
+            {
+                id: 2,
+                title: "The LX Arjan",
+                location: "Arjan, Dubailand",
+                priceFrom: "Contact for pricing",
+                developer: "Mulk Properties",
+                projectType: "commercial",
+                unitTypes: "Boutique Offices, Retail Spaces",
+                totalUnits: 71,
+                floors: "2B + G + 6 + R",
+                paymentPlan: "60/40",
+                handover: "Q3 2027",
+                imageUrl: "static-assets/IMG_3915_1751895627431.jpeg",
+                galleryImages: ["static-assets/IMG_3915_1751895627431.jpeg", "static-assets/IMG_3916_1751895627430.jpeg"],
+                featured: false,
+                isNew: true,
+                description: "Luxury boutique offices and curated retail spaces with clean, modern design. Direct access to Sheikh Zayed Road with planned metro connectivity.",
+                amenities: ["Business Centre", "Retail Hub", "Modern Design", "Generous Balconies"],
+                keyFeatures: ["Direct Sheikh Zayed Road access", "Planned metro line", "944-21,000 sq.ft units", "DED Mainland license"]
+            },
+            {
+                id: 3,
+                title: "JW Marriott Residences",
+                location: "Ras Al Khaimah",
+                priceFrom: "Starting from AED 3.8M",
+                developer: "JW Marriott",
+                projectType: "hotel",
+                unitTypes: "1BR, 2BR, 3BR, 4BR duplex and penthouse",
+                totalUnits: 474,
+                floors: "Multiple levels",
+                paymentPlan: "70/30",
+                handover: "2027",
+                imageUrl: "static-assets/IMG_3922_1751895881292.jpeg",
+                galleryImages: ["static-assets/IMG_3922_1751895881292.jpeg", "static-assets/IMG_3923_1751895881292.jpeg"],
+                featured: false,
+                isNew: true,
+                description: "Premium hotel-branded residences with 264 hotel keys and 474 residential units, offering luxury hospitality living.",
+                amenities: ["Hotel Services", "Concierge", "Spa", "Restaurant", "24/7 Security"],
+                keyFeatures: ["JW Marriott branding", "Hotel + residential", "RAK location", "Luxury hospitality services"]
+            },
+            {
+                id: 4,
+                title: "Norah Residence",
+                location: "Jumeirah Village Circle",
+                priceFrom: "Studio from AED 650K",
+                developer: "Al Tareq Star",
+                projectType: "residential",
+                unitTypes: "Studio, 1BR, 2BR+Study, 2BR Duplex, 3BR Duplex",
+                totalUnits: 183,
+                floors: "G+4P+12",
+                paymentPlan: "40/60",
+                handover: "Q2 2027",
+                imageUrl: "static-assets/IMG_3912_1751895552058.jpeg",
+                galleryImages: ["static-assets/IMG_3912_1751895552058.jpeg", "static-assets/IMG_3913_1751895552058.jpeg", "static-assets/IMG_3914_1751895552057.jpeg"],
+                featured: false,
+                isNew: true,
+                description: "Smart, spacious homes designed for modern living with smart home technology, fully equipped kitchens, and refined finishes. Views of pool, Halfa Park, or FIVE Jumeirah Village Hotel.",
+                amenities: ["Swimming Pool", "Gym", "BBQ Area", "Kids' Play Area", "Outdoor Theater", "Yoga Area", "Rooftop Juice Bar", "Smart Home Systems"],
+                keyFeatures: ["NAGA Architects design", "Smart home technology", "JVC location", "183 units"]
+            },
+            {
+                id: 5,
+                title: "Trafford Residences",
+                location: "Dubai South",
+                priceFrom: "1BR from AED 821K",
+                developer: "DV8 Developers",
+                projectType: "residential",
+                unitTypes: "1BR, 1BR+Study, 2BR",
+                totalUnits: 44,
+                floors: "G+4",
+                paymentPlan: "50/50",
+                handover: "Q4 2025",
+                imageUrl: "static-assets/IMG_3926_1751896020504.jpeg",
+                galleryImages: ["static-assets/IMG_3926_1751896020504.jpeg", "static-assets/IMG_3927_1751896020503.jpeg"],
+                featured: false,
+                isNew: true,
+                description: "Modern living in Dubai South with contemporary architecture and outstanding comfort. Near Al Maktoum International Airport expansion.",
+                amenities: ["Pickleball Court", "Basketball Court", "Badminton Court", "Table Tennis", "Yoga Space", "Outdoor Cinema", "BBQ Area", "Swimming Pool", "Kids' Pool", "Gym"],
+                keyFeatures: ["Dubai South location", "Airport proximity", "CM Kitchen appliances", "Jaguar sanitary fittings"]
+            },
+            {
+                id: 6,
+                title: "W Residences Al Marjan Island",
+                location: "Al Marjan Island, Ras Al Khaimah",
+                priceFrom: "1BR from AED 4.06M",
+                developer: "Dalands Holding",
+                projectType: "hotel",
+                unitTypes: "1BR, 2BR, 2BR Duplex, 3BR Duplex, 4BR Duplex",
+                totalUnits: "Multiple units",
+                floors: "B+G+21",
+                paymentPlan: "70/30",
+                handover: "December 2027",
+                imageUrl: "static-assets/IMG_3930_1751896210530.jpeg",
+                galleryImages: ["static-assets/IMG_3930_1751896210530.jpeg", "static-assets/IMG_3931_1751896210530.jpeg"],
+                featured: true,
+                isNew: true,
+                description: "The most magnetic address on Al Marjan Island featuring direct beach access, stunning design, and breathtaking views, all infused with the signature energy and iconic identity of W Hotels.",
+                amenities: ["Private Beach", "6 Exclusive Pools", "Pool Bar", "Fitness Centre", "Yoga Deck", "Spa Benefits", "Game Zone", "Private Cinema", "Play Area", "Show Kitchen", "Residents' Lounge", "Concierge & Valet Service"],
+                keyFeatures: ["W Hotels branding", "Marriott Bonvoy benefits", "Fully furnished residences", "Beachfront location", "ONVIA exclusive platform access"]
+            },
+            {
+                id: 7,
+                title: "OLA Residences",
+                location: "Al Marjan Island, Ras Al Khaimah",
+                priceFrom: "Studio from AED 1.18M",
+                developer: "Lacasa Living",
+                projectType: "residential",
+                unitTypes: "Studio, 1BR, 1BR with Private Pool",
+                totalUnits: 96,
+                floors: "2B+G+7+R",
+                paymentPlan: "40/60",
+                handover: "Q1 2027",
+                imageUrl: "static-assets/IMG_3928_1751896135619.jpeg",
+                galleryImages: ["static-assets/IMG_3928_1751896135619.jpeg", "static-assets/IMG_3929_1751896135619.jpeg"],
+                featured: false,
+                isNew: true,
+                description: "Exceptional lifestyle blending stunning beaches and majestic mountains with peaceful island atmosphere. Fully furnished apartments with modern amenities and breathtaking views.",
+                amenities: ["Co-Working Space", "Kids Play Area", "Kids Pool", "Adults Infinity Pool", "Storage Lockers", "Steam & Sauna Room", "Grand Lobby Lounge"],
+                keyFeatures: ["Al Marjan Island location", "Customized Italian furniture", "Fully equipped kitchens", "Flexible layouts", "Wooden ceilings"]
+            },
+            {
+                id: 8,
+                title: "One Residence",
+                location: "Downtown Dubai",
+                priceFrom: "Studio from AED 1.51M",
+                developer: "GINCO Properties",
+                projectType: "residential",
+                unitTypes: "Studio, 1BR, 2BR, 2BR+Maid, Penthouses",
+                totalUnits: 453,
+                floors: "Multiple levels",
+                paymentPlan: "50/50",
+                handover: "Q1 2027",
+                imageUrl: "static-assets/IMG_3919_1751895737939.jpeg",
+                galleryImages: ["static-assets/IMG_3919_1751895737939.jpeg", "static-assets/IMG_3918_1751895737939.jpeg"],
+                featured: true,
+                isNew: true,
+                description: "Exclusive downtown living where residents thrive as part of an exclusive inner circle. Gateway to Downtown Dubai with world-class amenities.",
+                amenities: ["Gym", "Yoga Studio", "Infinity Pool", "Entertainment Room", "Movie Theater", "Golf Simulator", "Zen Garden", "24x7 Valet Service", "Chef on Demand"],
+                keyFeatures: ["Downtown Dubai location", "453 units", "Exclusive inner circle", "GINCO Group legacy"]
+            },
+            {
+                id: 9,
+                title: "Golf Grove by Regent",
+                location: "Jumeirah Golf Estates",
+                priceFrom: "Studio from AED 586K",
+                developer: "Regent Developments",
+                projectType: "residential",
+                unitTypes: "Studio, 1BR, 1BR Garden Suite",
+                totalUnits: 98,
+                floors: "B+G+1P+7+R",
+                paymentPlan: "60/40",
+                handover: "Q2 2027",
+                imageUrl: "static-assets/IMG_3924_1751895960948.jpeg",
+                galleryImages: ["static-assets/IMG_3924_1751895960948.jpeg", "static-assets/IMG_3925_1751895960948.jpeg"],
+                featured: false,
+                isNew: true,
+                description: "Wake up to golf estate views with nature-inspired craftsmanship. Overlooking JGE Golf Course with premium amenities and smart home features.",
+                amenities: ["Rooftop Infinity Pool", "Golf Simulator", "Fitness Lab", "Sky Cinema", "Zen Garden", "Coffee Bar", "Sauna", "Cold Plunge", "Co-working Space"],
+                keyFeatures: ["Golf course views", "Nature-inspired design", "Smart home automation", "Premium location in JGE"]
+            },
+            {
+                id: 10,
+                title: "Arthouse Residences",
+                location: "Al Marjan Island, Ras Al Khaimah",
+                priceFrom: "Studio from AED 925K",
+                developer: "Clédor",
+                projectType: "residential",
+                unitTypes: "Studio, 1BR, 1BR+Study, 1BR+Study Duplex",
+                totalUnits: 201,
+                floors: "Multiple levels",
+                paymentPlan: "60/40",
+                handover: "Q4 2027",
+                imageUrl: "static-assets/IMG_3920_1751895800418.jpeg",
+                galleryImages: ["static-assets/IMG_3920_1751895800418.jpeg", "static-assets/IMG_3921_1751895800418.jpeg"],
+                featured: false,
+                isNew: true,
+                description: "Hotel-branded residences bringing Manhattan's Upper West Side charm to Al Marjan Island. Near upcoming Wynn Resorts with direct beach access.",
+                amenities: ["Private Beach Club", "Rooftop Infinity Pool", "Fitness Centre", "Spa", "Cigar Lounge", "Yoga Deck", "BBQ Area", "Concierge", "Valet Service"],
+                keyFeatures: ["Heritage NYC brand", "Beach access", "Near Wynn Resorts", "Al Marjan Island location"]
+            },
+            {
+                id: 11,
+                title: "Fairmont Residences Al Marjan Island",
+                location: "Al Marjan Island, Ras Al Khaimah",
+                priceFrom: "Starting from AED 2.5M",
+                developer: "Ardee Developments",
+                projectType: "hotel",
+                unitTypes: "1BR, 2BR, 2BR+Study, 3BR, Townhouse, Sea Villa",
+                totalUnits: 523,
+                floors: "Multiple levels",
+                paymentPlan: "60/40",
+                handover: "Q4 2028",
+                imageUrl: "static-assets/IMG_4020_1752446771254.jpeg",
+                galleryImages: ["static-assets/IMG_4020_1752446771254.jpeg", "static-assets/IMG_4021_1752446771254.jpeg"],
+                featured: true,
+                isNew: true,
+                description: "Refined seaside living with over a century of Fairmont hospitality experience. Elegant apartments, townhouses, and sea villas with exceptional views and world-class services on Al Marjan Island's pristine 7.8km coastline.",
+                amenities: ["F&B Outlets", "Direct Beach Access", "Family & Kids Pool", "Adults Sky Pool & Bar", "Residents Lobby & Lounge", "Fairmont Fit Fitness Centre", "Wellness & Treatment Rooms", "Screening Room", "Games Room", "Kids Club", "Water Sport Facilities", "Accor Ownership Benefits", "24/7 Concierge", "Valet Services"],
+                keyFeatures: ["Fairmont branding", "523 total units", "7.8km pristine coastline", "Accor ownership benefits", "Sea villas available", "Direct beach access"]
+            },
+            {
+                id: 12,
+                title: "Skyhills Astra Tower B",
+                location: "Jumeirah Village Circle",
+                priceFrom: "Studio from AED 370K",
+                developer: "HRE Development",
+                projectType: "residential",
+                unitTypes: "Studio, 1BR, 2BR Duplex, 3BR Duplex",
+                totalUnits: 848,
+                floors: "36 floors",
+                paymentPlan: "20% down, 15% during construction, 25% on completion, 40% post-handover",
+                handover: "Q4 2027",
+                imageUrl: "static-assets/IMG_4022_1752446872777.jpeg",
+                galleryImages: ["static-assets/IMG_4022_1752446872777.jpeg"],
+                featured: false,
+                isNew: true,
+                description: "Architectural symbol with special meaning - each purchase contributes to children's education worldwide through Dubai Cares initiative. Fully furnished apartments with premium amenities and sustainable living features.",
+                amenities: ["Rooftop Yoga Area", "Two Sports Pools", "Beach-style Pool", "Business Lounge & Library", "Indoor & Outdoor Fitness", "EV Charging Stations", "500m Podium with Running Track", "Padel Court", "4-Level Underground Parking"],
+                keyFeatures: ["Dubai Cares partnership", "Fully furnished", "36 floors", "8 elevators", "One parking space per unit", "15 AED/sqft service charge", "370-2002 sq ft units"]
+            },
+            {
+                id: 13,
+                title: "DoubleTree by Hilton Residences",
+                location: "Al Marjan Island, Ras Al Khaimah",
+                priceFrom: "Starting from AED 1.7M",
+                developer: "Hilton",
+                projectType: "hotel",
+                unitTypes: "1BR, 2BR, 3BR, Suites",
+                totalUnits: null,
+                floors: "Multiple levels",
+                paymentPlan: "Contact for details",
+                handover: "TBA",
+                imageUrl: "static-assets/IMG_4023_1752446994904.jpeg",
+                galleryImages: ["static-assets/IMG_4023_1752446994904.jpeg"],
+                featured: true,
+                isNew: true,
+                description: "Premium branded residences by DoubleTree by Hilton, offering the signature hospitality experience with residential comfort. Located on the pristine Al Marjan Island with direct beach access and world-class amenities.",
+                amenities: ["Hotel Services", "Beach Access", "Fitness Center", "Spa Services", "Concierge", "Valet Parking", "Swimming Pool", "Restaurant & Bar", "24/7 Security", "Housekeeping Services"],
+                keyFeatures: ["DoubleTree by Hilton branding", "Hilton Honors benefits", "Al Marjan Island location", "Beachfront access", "Hotel-residence hybrid", "Premium hospitality services"]
+            }
+        ];
+
+        // Filter functionality
+        function filterProperties(type) {
+            const filteredProperties = type === 'all' 
+                ? properties 
+                : properties.filter(prop => prop.projectType === type);
+            
+            displayProperties(filteredProperties);
+            
+            // Update active filter button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-gold', 'text-navy');
+                btn.classList.add('bg-white', 'border-2', 'border-gold', 'text-gold');
+            });
+            
+            event.target.classList.remove('bg-white', 'border-2', 'border-gold', 'text-gold');
+            event.target.classList.add('bg-gold', 'text-navy');
+        }
+
+        // Display properties
+        function displayProperties(propertiesToShow) {
+            const container = document.getElementById('properties');
+            container.innerHTML = '';
+            
+            propertiesToShow.forEach(property => {
+                const card = document.createElement('div');
+                card.className = 'property-card bg-white rounded-2xl shadow-lg overflow-hidden cursor-pointer';
+                card.onclick = () => showPropertyDetails(property);
+                
+                card.innerHTML = `
+                    <div class="relative">
+                        <img src="${property.imageUrl}" alt="${property.title}" class="w-full h-64 object-cover">
+                        ${property.featured ? '<div class="absolute top-4 left-4 bg-gold text-navy px-3 py-1 rounded-full text-sm font-semibold">Featured</div>' : ''}
+                        ${property.isNew ? '<div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">New</div>' : ''}
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold navy mb-2">${property.title}</h3>
+                        <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt mr-2"></i>${property.location}</p>
+                        <p class="text-lg font-semibold navy mb-2">${property.priceFrom}</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <span><i class="fas fa-building mr-1"></i>${property.developer}</span>
+                            <span><i class="fas fa-calendar mr-1"></i>${property.handover}</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">${property.description.substring(0, 100)}...</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs bg-gray-100 px-2 py-1 rounded-full">${property.paymentPlan}</span>
+                            <span class="text-gold font-semibold">View Details →</span>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+
+        // Show property details in modal
+        function showPropertyDetails(property) {
+            const modal = document.getElementById('propertyModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            modalContent.innerHTML = `
+                <div class="max-w-4xl mx-auto">
+                    <div class="mb-6">
+                        <img src="${property.imageUrl}" alt="${property.title}" class="w-full h-96 object-cover rounded-lg mb-4">
+                        <h2 class="text-3xl font-bold navy mb-2">${property.title}</h2>
+                        <p class="text-xl text-gray-600 mb-4"><i class="fas fa-map-marker-alt mr-2"></i>${property.location}</p>
+                        <p class="text-2xl font-bold navy mb-6">${property.priceFrom}</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <h3 class="text-xl font-bold navy mb-4">Project Details</h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Developer:</span>
+                                    <span class="font-semibold">${property.developer}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Unit Types:</span>
+                                    <span class="font-semibold">${property.unitTypes}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Payment Plan:</span>
+                                    <span class="font-semibold">${property.paymentPlan}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Handover:</span>
+                                    <span class="font-semibold">${property.handover}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Floors:</span>
+                                    <span class="font-semibold">${property.floors}</span>
+                                </div>
+                                ${property.totalUnits ? `<div class="flex justify-between">
+                                    <span class="text-gray-600">Total Units:</span>
+                                    <span class="font-semibold">${property.totalUnits}</span>
+                                </div>` : ''}
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-bold navy mb-4">Description</h3>
+                            <p class="text-gray-600 leading-relaxed">${property.description}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-bold navy mb-4">Amenities</h3>
+                            <ul class="grid grid-cols-1 gap-2">
+                                ${property.amenities.map(amenity => `<li class="flex items-center text-gray-600"><i class="fas fa-check text-green-500 mr-2"></i>${amenity}</li>`).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-bold navy mb-4">Key Features</h3>
+                            <ul class="grid grid-cols-1 gap-2">
+                                ${property.keyFeatures.map(feature => `<li class="flex items-center text-gray-600"><i class="fas fa-star text-gold mr-2"></i>${feature}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 text-center">
+                        <a href="#contact" class="bg-gold text-navy px-8 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition-colors" onclick="closeModal()">
+                            Contact Us for More Information
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('propertyModal').style.display = 'none';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Display all properties initially (branded residences first)
+            filterProperties('hotel');
+            
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                const modal = document.getElementById('propertyModal');
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // Close modal with close button
+            document.querySelector('.close').addEventListener('click', closeModal);
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        // Close mobile menu if open
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
